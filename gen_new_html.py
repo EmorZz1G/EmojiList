@@ -44,13 +44,14 @@ def transform_to_latex(raw_str):
     # 去掉前后空格
     raw_str = raw_str.strip()
     # 将空格替换为下划线
+    raw_str = raw_str.replace(': ', '-')
     raw_str = raw_str.replace(' ', '-')
     # 将中文括号替换为英文括号
     return raw_str
 
 if testing:
-    print("Running in test mode, limiting to 5 rows.")
-    tr_rows = tr_rows[:5]
+    print("Running in test mode, limiting to 20 rows.")
+    tr_rows = tr_rows[:70]
 
 # 处理有多个th的
 for tr in tr_rows:
@@ -59,9 +60,8 @@ for tr in tr_rows:
         # th colspan修改为6
         th['colspan'] = '6'
         if testing:
+            print("修改了th的colspan为6")
             print(tr)
-            break
-    # elif tr
     # 如果tr里面有td
     elif len(tr.find_all('td')) > 0:
         tds = tr.find_all('td')
@@ -72,11 +72,13 @@ for tr in tr_rows:
         new_string = transform_to_latex(raw_str)
         button = soup.new_tag('button')
         button.string = 'Copy'
-        button['onclick'] = f"navigator.clipboard.writeText('{new_string}');"
+        clipboard_str = f"\\emoji{{{new_string}}}"
+        button['onclick'] = f"navigator.clipboard.writeText('{clipboard_str}');"
         new_td.string = new_string+" "
         new_td.append(button)
         tr.insert(6, new_td)
         if testing:
+            print("添加了新的td")
             print(tr)
             break
     else:
