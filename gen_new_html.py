@@ -54,7 +54,13 @@ if testing:
 
 # 处理有多个th的
 for tr in tr_rows:
-    if len(tr)==1:continue
+    if len(tr)==1:
+        th = tr.find('th')
+        # th colspan修改为6
+        th['colspan'] = '6'
+        if testing:
+            print(tr)
+            break
     # elif tr
     # 如果tr里面有td
     elif len(tr.find_all('td')) > 0:
@@ -65,9 +71,9 @@ for tr in tr_rows:
         new_td['class'] = 'emoji-latex name'
         new_string = transform_to_latex(raw_str)
         button = soup.new_tag('button')
-        button.string = ' (Copy)'
+        button.string = 'Copy'
         button['onclick'] = f"navigator.clipboard.writeText('{new_string}');"
-        new_td.string = new_string
+        new_td.string = new_string+" "
         new_td.append(button)
         tr.insert(6, new_td)
         if testing:
