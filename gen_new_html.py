@@ -32,9 +32,10 @@ for tr in tr_rows:
         # 设置新<th>里面的内容
         new_th.string = 'Possible Emoji Key in Latex'
         # 将新<th>插入到当前第三个th后面
-        tr.insert(3, new_th)
+        tr.insert(6, new_th)
         if testing:
             print(tr)
+            break
 
 tr_rows = table.find_all('tr')
 
@@ -64,11 +65,14 @@ for tr in tr_rows:
         new_td['class'] = 'emoji-latex name'
         new_string = transform_to_latex(raw_str)
         button = soup.new_tag('button')
-        button.string = 'Copy to Clipboard'
+        button.string = ' (Copy)'
         button['onclick'] = f"navigator.clipboard.writeText('{new_string}');"
-        new_td.append(button)
         new_td.string = new_string
+        new_td.append(button)
         tr.insert(6, new_td)
+        if testing:
+            print(tr)
+            break
     else:
         pass
         # 不处理
