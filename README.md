@@ -7,7 +7,7 @@
 
 All resources of this project are sourced entirely from https://unicode.org/emoji/charts/emoji-list.html. They are for learning purposes only and commercial use is prohibited. In case of any infringement, please contact us for removal.
 
-## 如何在Latex中使用Emoji
+## 如何在Latex中使用Emoji (ZH)
 1. 使用LuaLatex编译器
 2. 在Latex文件中引入库
 - 导入emoji包：
@@ -16,6 +16,16 @@ All resources of this project are sourced entirely from https://unicode.org/emoj
     > \setemojifont{TwemojiMozilla}
 3. 在我们的[网站](https://emorzz1g.github.io/EmojiList/)中复制你需要的Latex指令
     > 例如：\emoji{grinning-face}
+
+## How to Use Emojis in LaTeX (Eng.)
+1. Use the LuaLaTeX compiler
+2. Import libraries in the LaTeX file
+   - Import the emoji package:
+     > \usepackage{emoji}
+   - Optional emoji font family:
+     > \setemojifont{TwemojiMozilla}
+3. Copy the required LaTeX commands from our [website](https://emorzz1g.github.io/EmojiList/)
+   > For example: \emoji{grinning-face}
 
 参考：[Overleaf guilds](https://www.overleaf.com/learn/latex/Questions/Inserting_emojis_in_LaTeX_documents_on_Overleaf)
     
