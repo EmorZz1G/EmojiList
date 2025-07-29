@@ -14,7 +14,14 @@ All resources of this project are sourced entirely from https://unicode.org/emoj
     > \usingpackage{emoji}
 - 可选的emoji家族
     > \setemojifont{TwemojiMozilla}
+3. 在我们的[网站](https://emorzz1g.github.io/EmojiList/)中复制你需要的Latex指令
+    > 例如：\emoji{grinning-face}
 
 参考：[Overleaf guilds](https://www.overleaf.com/learn/latex/Questions/Inserting_emojis_in_LaTeX_documents_on_Overleaf)
     
-TODO
+## TODO List
+
+
+## Commits
+1. 如果您喜欢我的项目，希望您可以留下一个星星⭐。非常感谢您的支持！如果您有任何问题，您可以直接和我联系或提出Issue。
+(If you like my project, please star⭐ my repo. It's very important to me. Thank you for your support. If you have any questions, you can contact me or raise an Issue.)
