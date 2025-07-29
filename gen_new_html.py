@@ -2,6 +2,14 @@ from bs4 import BeautifulSoup
 import os
 proj_pth = os.path.dirname(__file__)
 
+import argparse
+
+parser = argparse.ArgumentParser(description='Generate new HTML with additional column for emoji LaTeX keys.')
+parser.add_argument('--test', action='store_true', help='Run in test mode with a limited number of rows.')
+args = parser.parse_args()
+
+testing = args.test
+
 html_context = open(proj_pth+'/index_ori.html')
 
 soup = BeautifulSoup(html_context, 'html.parser')
@@ -11,20 +19,24 @@ table = soup.find('table')
 tr_rows = table.find_all('tr')
 # 只有一个th的不需要处理
 
+if testing:
+    tr_rows = tr_rows[:30]  # 测试模式下只处理前10行
+    print("测试模式下，只处理前30行。")
+
 # 处理有多个th的
 for tr in tr_rows:
     if len(tr)==1:continue
-    else:
+    elif len(tr.find_all('th')) > 0 and len(tr.find_all('td')) ==0:
         # 新建一个<th>元素
         new_th = soup.new_tag('th')
         # 设置新<th>里面的内容
         new_th.string = 'Possible Emoji Key in Latex'
         # 将新<th>插入到当前第三个th后面
         tr.insert(3, new_th)
+        if testing:
+            print(tr)
 
 tr_rows = table.find_all('tr')
-
-
 
 def transform_to_latex(raw_str):
     # 处理raw_str
@@ -35,7 +47,10 @@ def transform_to_latex(raw_str):
     # 将中文括号替换为英文括号
     return raw_str
 
-# tr_rows = tr_rows[:5]
+if testing:
+    print("Running in test mode, limiting to 5 rows.")
+    tr_rows = tr_rows[:5]
+
 # 处理有多个th的
 for tr in tr_rows:
     if len(tr)==1:continue
@@ -57,8 +72,13 @@ for tr in tr_rows:
     else:
         pass
         # 不处理
-    
-print("处理完成，已添加新的列和按钮。") 
-# 保存修改后的HTML到新文件
-with open(proj_pth+'/index.html', 'w', encoding='utf-8') as file:
-    file.write(str(soup))
+
+if testing:
+    print("测试模式下，不保存修改后的HTML文件。")
+else:
+    print("处理完成，已添加新的列和按钮。") 
+    # 保存修改后的HTML到新文件
+    with open(proj_pth+'/index.html', 'w', encoding='utf-8') as file:
+        file.write(str(soup))
+
+    print("新HTML文件已保存为 index.html。")
