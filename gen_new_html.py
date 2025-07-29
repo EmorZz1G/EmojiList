@@ -42,7 +42,6 @@ for tr in tr_rows:
     # elif tr
     # 如果tr里面有td
     elif len(tr.find_all('td')) > 0:
-        print(len(tr))
         tds = tr.find_all('td')
         raw_str = tds[-2].string
         new_td = soup.new_tag('td')
@@ -55,7 +54,6 @@ for tr in tr_rows:
         new_td.append(button)
         new_td.string = new_string
         tr.insert(6, new_td)
-        break
     else:
         pass
         # 不处理
