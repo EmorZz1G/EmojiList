@@ -72,7 +72,8 @@ for tr in tr_rows:
         new_string = transform_to_latex(raw_str)
         button = soup.new_tag('button')
         button.string = 'Copy'
-        clipboard_str = f"\\emoji{{{new_string}}}"
+        # 逆天HTML，两次转义
+        clipboard_str = f"\\\\emoji{{{new_string}}}"
         button['onclick'] = f"navigator.clipboard.writeText('{clipboard_str}');"
         new_td.string = new_string+" "
         new_td.append(button)
